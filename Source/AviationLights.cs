@@ -218,7 +218,7 @@ namespace AviationLights
             mainLight.range = Range;
             if (SpotAngle > 0.0f)
             {
-                mainLight.type = (spotLight) ? LightType.Spot : LightType.Point;
+                mainLight.type = spotLight ? LightType.Spot : LightType.Point;
                 mainLight.spotAngle = SpotAngle;
             }
             else
@@ -228,7 +228,7 @@ namespace AviationLights
             }
             // Remove layer 10 from the cullingMask - it's the layer KSP uses to draw planets while in
             // orbit, and longer distances on the lights will illuminate the surface.
-            mainLight.cullingMask = (mainLight.cullingMask & ~(1 << 10));
+            mainLight.cullingMask = mainLight.cullingMask & ~(1 << 10);
 
             UpdateMode();
 
@@ -357,7 +357,7 @@ namespace AviationLights
                 floatRange.onFieldChanged = ValueChanged;
 
                 chooseField = Fields["spotLight"];
-                chooseField.guiActiveEditor = (SpotAngle > 0.0f);
+                chooseField.guiActiveEditor = SpotAngle > 0.0f;
                 UI_Toggle toggle = (UI_Toggle)chooseField.uiControlEditor;
                 toggle.onFieldChanged = ValueChanged;
             }
@@ -405,19 +405,19 @@ namespace AviationLights
                     switch (field.name)
                     {
                         case "Intensity":
-                            paramUpdate = delegate(ModuleNavLight lt, float val) { lt.Intensity = val; };
+                            paramUpdate = delegate (ModuleNavLight lt, float val) { lt.Intensity = val; };
                             break;
                         case "Range":
-                            paramUpdate = delegate(ModuleNavLight lt, float val) { lt.Range = val; };
+                            paramUpdate = delegate (ModuleNavLight lt, float val) { lt.Range = val; };
                             break;
                         case "lightR":
-                            paramUpdate = delegate(ModuleNavLight lt, float val) { lt.lightR = val; };
+                            paramUpdate = delegate (ModuleNavLight lt, float val) { lt.lightR = val; };
                             break;
                         case "lightG":
-                            paramUpdate = delegate(ModuleNavLight lt, float val) { lt.lightG = val; };
+                            paramUpdate = delegate (ModuleNavLight lt, float val) { lt.lightG = val; };
                             break;
                         case "lightB":
-                            paramUpdate = delegate(ModuleNavLight lt, float val) { lt.lightB = val; };
+                            paramUpdate = delegate (ModuleNavLight lt, float val) { lt.lightB = val; };
                             break;
                     }
 
@@ -640,13 +640,12 @@ namespace AviationLights
                 }
 
                 // Or it with lightsOn in case we're in On mode.
-                lightsOn = ((flashCounter & 1) == 1);
-
+                lightsOn = (flashCounter & 1) == 1;
 
                 Color newColor = new Color(Color.x, Color.y, Color.z);
                 if (lensMaterial.Length > 0)
                 {
-                    Color newEmissiveColor = (lightsOn) ? newColor : XKCDColors.Black;
+                    Color newEmissiveColor = lightsOn ? newColor : XKCDColors.Black;
                     for (int i = 0; i < lensMaterial.Length; ++i)
                     {
                         lensMaterial[i].SetColor(colorProperty, newColor);
@@ -654,13 +653,13 @@ namespace AviationLights
                     }
                 }
 
-                mainLight.intensity = (lightsOn) ? Intensity : 0.0f;
+                mainLight.intensity = lightsOn ? Intensity : 0.0f;
                 mainLight.range = Range;
                 mainLight.color = newColor;
 
                 if (SpotAngle > 0.0f)
                 {
-                    mainLight.type = (spotLight) ? LightType.Spot : LightType.Point;
+                    mainLight.type = spotLight ? LightType.Spot : LightType.Point;
                 }
             }
         }
@@ -719,11 +718,11 @@ namespace AviationLights
         /// <param name="lightsOn"></param>
         private void UpdateLights(bool lightsOn)
         {
-            mainLight.intensity = (lightsOn) ? Intensity : 0.0f;
+            mainLight.intensity = lightsOn ? Intensity : 0.0f;
 
             if (lensMaterial.Length > 0)
             {
-                Color newColor = (lightsOn) ? new Color(Color.x, Color.y, Color.z) : XKCDColors.Black;
+                Color newColor = lightsOn ? new Color(Color.x, Color.y, Color.z) : XKCDColors.Black;
 
                 for (int i = 0; i < lensMaterial.Length; ++i)
                 {

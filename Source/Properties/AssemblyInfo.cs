@@ -1,23 +1,22 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Aviation Lights for KSP")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Aviation Lights")]
+[assembly: AssemblyDescription("Aviation Lights for Kerbal Space Program")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AviationLights")]
-[assembly: AssemblyCopyright("Copyright © 2014-2021")]
+[assembly: AssemblyCopyright("Copyright © 2014-2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.1.2")]
+[assembly: AssemblyVersion("4.1.4")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
